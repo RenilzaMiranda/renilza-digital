@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método Prisma | Renilza Miranda</title>
+    <meta name="description" content="Uma mentoria íntima sobre identidade, presença e a forma como você se enxerga. Para a mulher que quer alinhar quem ela é por dentro com a vida que está construindo por fora.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C5A572;
+            --gold-light: #D4B98A;
+            --gold-dark: #A68B5B;
+            --black: #1A1A1A;
+            --charcoal: #2D2D2D;
+            --dark-bg: #0D0D0D;
+            --cream: #FAF7F2;
+            --cream-dark: #F0EBE3;
+            --text-light: #E8E4DE;
+            --text-muted: #9A9590;
+            --white: #FFFFFF;
+            --serif: 'Cormorant Garamond', Georgia, serif;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: var(--sans);
+            color: var(--black);
+            background: var(--cream);
+            line-height: 1.75;
+            overflow-x: hidden;
+            font-weight: 300;
+        }
+
+        /* ===== TIPO DE TEXTO ===== */
+        .whisper {
+            font-family: var(--serif);
+            font-style: italic;
+            color: var(--gold);
+            display: block;
+            margin: 8px 0 24px;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+        }
+
+        .breath {
+            display: block;
+            width: 1px;
+            height: 32px;
+            background: var(--gold);
+            opacity: 0.4;
+            margin: 32px auto;
+        }
+
+        p.intimate {
+            font-family: var(--serif);
+            font-size: 1.2rem;
+            line-height: 1.7;
+            font-style: italic;
+            color: var(--charcoal);
+        }
+
+        /* ===== UTILITY ===== */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        .text-center { text-align: center; }
+        .gold { color: var(--gold); }
+        .serif { font-family: var(--serif); }
+
+        /* ===== LANG SWITCHER ===== */
+        #lang-switcher {
+            position: fixed;
+            top: 16px;
+            right: 18px;
+            z-index: 200;
+            display: flex;
+            gap: 4px;
+            background: rgba(13, 13, 13, 0.6);
+            padding: 4px;
+            border-radius: 999px;
+            border: 1px solid rgba(197, 165, 114, 0.4);
+            backdrop-filter: blur(8px);
+        }
+        .lang-switch-btn {
+            border: none;
+            background: transparent;
+            color: var(--cream);
+            opacity: 0.65;
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 4px 12px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .lang-switch-btn:hover { opacity: 0.9; }
+        .lang-switch-btn.active { opacity: 1; background: var(--gold); color: var(--dark-bg); }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--charcoal) 50%, #1a1510 100%);
+            color: var(--text-light);
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 90vh;
+        }
+
+        .hero-content {
+            padding: 80px 48px 80px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: calc((100vw - 1100px) / 2 + 24px);
+        }
+
+        .hero-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            filter: grayscale(0.3);
+        }
+
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--dark-bg) 0%, transparent 30%, transparent 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(197, 165, 114, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 6px 20px;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+            font-weight: 500;
+            align-self: flex-start;
+        }
+
+        .hero h1 {
+            font-family: var(--serif);
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .hero-subtitle {
+            font-family: var(--serif);
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 650px;
+            font-style: italic;
+        }
+
+        .hero-line {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 0 0 40px;
+        }
+
+        .hero-description {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            max-width: 680px;
+            margin: 0 0 48px;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--dark-bg);
+            padding: 18px 48px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-btn:hover {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(197, 165, 114, 0.3);
+        }
+
+        .cta-btn-outline {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+        }
+
+        .cta-btn-outline:hover {
+            background: var(--gold);
+            color: var(--dark-bg);
+        }
+
+        /* ===== PROBLEM SECTION ===== */
+        .problem {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--black);
+        }
+
+        .section-line {
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+            margin-bottom: 40px;
+        }
+
+        .section-line.center { margin-left: auto; margin-right: auto; }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-top: 60px;
+        }
+
+        .problem-list { list-style: none; }
+
+        .problem-list li {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--cream-dark);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            font-size: 1.02rem;
+            color: var(--charcoal);
+        }
+
+        .problem-list li::before {
+            content: '—';
+            color: var(--gold);
+            font-weight: 600;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .problem-quote {
+            background: var(--cream);
+            padding: 48px;
+            position: relative;
+        }
+
+        .problem-quote::before {
+            content: '"';
+            font-family: var(--serif);
+            font-size: 6rem;
+            color: var(--gold);
+            opacity: 0.3;
+            position: absolute;
+            top: 10px;
+            left: 24px;
+            line-height: 1;
+        }
+
+        .problem-quote p {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--charcoal);
+            position: relative;
+            z-index: 1;
+        }
+
+        .problem-quote cite {
+            display: block;
+            margin-top: 20px;
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            font-style: normal;
+            color: var(--gold);
+            letter-spacing: 1px;
+        }
+
+        /* ===== TRANSFORMATION ===== */
+        .transformation {
+            padding: 100px 0;
+            background: var(--cream);
+        }
+
+        .transform-columns {
+            display: grid;
+            grid-template-columns: 1fr 60px 1fr;
+            gap: 0;
+            margin-top: 60px;
+            align-items: start;
+        }
+
+        .transform-col h3 {
+            font-family: var(--serif);
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            font-weight: 400;
+        }
+
+        .transform-col.before h3 { color: var(--text-muted); }
+        .transform-col.after h3 { color: var(--gold-dark); }
+
+        .transform-col ul {
+            list-style: none;
+        }
+
+        .transform-col ul li {
+            padding: 12px 0;
+            font-size: 0.95rem;
+            color: var(--charcoal);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .transform-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--gold);
+            padding-top: 60px;
+        }
+
+        /* ===== METHOD ===== */
+        .method {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--charcoal) 100%);
+            color: var(--text-light);
+        }
+
+        .method .section-title { color: var(--text-light); }
+
+        .phases-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .phase-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(197, 165, 114, 0.15);
+            padding: 40px 28px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .phase-card:hover {
+            border-color: var(--gold);
+            background: rgba(197, 165, 114, 0.05);
+            transform: translateY(-4px);
+        }
+
+        .phase-number {
+            font-family: var(--serif);
+            font-size: 3rem;
+            color: var(--gold);
+            opacity: 0.4;
+            font-weight: 300;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .phase-card h3 {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+            color: var(--cream);
+        }
+
+        .phase-card p {
+            font-size: 0.88rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        .phase-topics {
+            list-style: none;
+            margin-top: 16px;
+        }
+
+        .phase-topics li {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            padding: 4px 0;
+            padding-left: 14px;
+            position: relative;
+        }
+
+        .phase-topics li::before {
+            content: '·';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        /* ===== WHAT'S INCLUDED ===== */
+        .included {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .included-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .included-item {
+            padding: 36px;
+            background: var(--cream);
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .included-item h4 {
+            font-family: var(--serif);
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: var(--black);
+        }
+
+        .included-item p {
+            font-size: 0.9rem;
+            color: var(--charcoal);
+            line-height: 1.7;
+        }
+
+        /* ===== ABOUT ===== */
+        .about {
+            padding: 100px 0;
+            background: var(--cream);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            aspect-ratio: 3/4;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .about-text h2 {
+            font-family: var(--serif);
+            font-size: 2.2rem;
+            font-weight: 400;
+            margin-bottom: 24px;
+        }
+
+        .about-text p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--charcoal);
+            margin-bottom: 16px;
+        }
+
+        .about-credentials {
+            list-style: none;
+            margin-top: 32px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .about-credentials li {
+            font-size: 0.85rem;
+            color: var(--gold-dark);
+            font-weight: 500;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .about-credentials li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-size: 0.6rem;
+            top: 3px;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .testimonial-card {
+            padding: 40px 32px;
+            background: var(--cream);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-family: var(--serif);
+            font-size: 4rem;
+            color: var(--gold);
+            opacity: 0.3;
+            position: absolute;
+            top: 16px;
+            left: 24px;
+            line-height: 1;
+        }
+
+        .testimonial-stars {
+            color: var(--gold);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-card p {
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: var(--charcoal);
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--black);
+        }
+
+        .testimonial-role {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* ===== PRICING ===== */
+        .pricing {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1510 100%);
+            color: var(--text-light);
+        }
+
+        .pricing .section-title { color: var(--text-light); }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(197, 165, 114, 0.2);
+            padding: 48px 40px;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--gold);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--gold);
+            background: rgba(197, 165, 114, 0.06);
+        }
+
+        .pricing-card.featured::before {
+            content: attr(data-badge);
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: var(--dark-bg);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            padding: 5px 18px;
+            font-family: var(--serif);
+            font-style: italic;
+            white-space: nowrap;
+        }
+
+        .pricing-name {
+            font-family: var(--serif);
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: var(--cream);
+        }
+
+        .pricing-sessions {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        .pricing-value {
+            font-family: var(--serif);
+            font-size: 3.2rem;
+            font-weight: 600;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .pricing-value span {
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        .pricing-installment {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 40px;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .pricing-card .cta-btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* ===== FAQ ===== */
+        .faq {
+            padding: 100px 0;
+            background: var(--cream);
+        }
+
+        .faq-list {
+            max-width: 750px;
+            margin: 60px auto 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--cream-dark);
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            font-family: var(--sans);
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--black);
+            padding: 24px 0;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.4rem;
+            color: var(--gold);
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 320px;
+        }
+
+        .faq-answer p {
+            padding-bottom: 24px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--charcoal);
+        }
+
+        /* ===== FINAL CTA ===== */
+        .final-cta {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--charcoal) 100%);
+            color: var(--text-light);
+            text-align: center;
+            position: relative;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .final-cta h2 {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .final-cta p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 48px;
+            font-weight: 300;
+        }
+
+        .guarantee {
+            margin-top: 40px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding: 40px 0;
+            background: var(--dark-bg);
+            text-align: center;
+            border-top: 1px solid rgba(197, 165, 114, 0.1);
+        }
+
+        .footer p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .footer .home-link {
+            display: inline-block;
+            margin-top: 14px;
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 968px) {
+            .hero { grid-template-columns: 1fr; min-height: auto; }
+            .hero-content { padding: 60px 24px 40px; text-align: center; align-items: center; }
+            .hero-badge { align-self: center; }
+            .hero-content .hero-line { margin: 0 auto 40px; }
+            .hero-subtitle, .hero-description { margin-left: auto; margin-right: auto; }
+            .hero-image { max-height: 400px; }
+            .hero-image::after { background: linear-gradient(180deg, var(--dark-bg) 0%, transparent 20%, transparent 80%, var(--dark-bg) 100%); }
+            .problem-grid,
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .phases-grid { grid-template-columns: repeat(2, 1fr); }
+            .included-grid { grid-template-columns: repeat(2, 1fr); }
+            .testimonials-grid { grid-template-columns: 1fr; max-width: 500px; margin-left: auto; margin-right: auto; }
+            .transform-columns { grid-template-columns: 1fr; gap: 20px; }
+            .transform-arrow { transform: rotate(90deg); padding: 0; }
+            .about-image { max-width: 400px; margin: 0 auto; }
+        }
+
+        @media (max-width: 640px) {
+            .phases-grid { grid-template-columns: 1fr; }
+            .included-grid { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
+            .about-credentials { grid-template-columns: 1fr; }
+            section { padding: 80px 0; }
+            .cta-btn { width: 100%; text-align: center; padding: 18px 32px; }
+        }
+
+        /* ===== STICKY HEADER ===== */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px 0;
+            transform: translateY(-100%);
+            transition: transform 0.4s ease;
+            border-bottom: 1px solid rgba(197, 165, 114, 0.1);
+        }
+
+        .top-bar.visible { transform: translateY(0); }
+
+        .top-bar-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar-logo {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .top-bar .cta-btn {
+            padding: 10px 28px;
+            font-size: 0.72rem;
+        }
+
+        /* ===== ANIMATION ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LANG SWITCHER -->
+    <div id="lang-switcher">
+        <button type="button" class="lang-switch-btn" data-lang="pt">PT</button>
+        <button type="button" class="lang-switch-btn" data-lang="en">EN</button>
+    </div>
+
+    <!-- STICKY HEADER -->
+    <div class="top-bar" id="topBar">
+        <div class="top-bar-inner">
+            <span class="top-bar-logo">Método Prisma</span>
+            <a href="#investimento" class="cta-btn" data-i18n="topbar.cta">Conversar comigo</a>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge" data-i18n="hero.badge">Uma conversa com Renilza Miranda</div>
+            <h1>Método <em>Prisma</em></h1>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">Para a mulher que sente que já passou da hora<br>de viver alinhada com o que sempre soube por dentro.</p>
+            <div class="hero-line"></div>
+            <p class="hero-description" data-i18n="hero.desc1">
+                Existe um momento em que tentar parecer cansa.<br>
+                Daí em diante, o que pede passagem é outra coisa.
+            </p>
+            <p class="hero-description" style="margin-top: -24px;" data-i18n="hero.desc2">
+                A gente trabalha em três frentes que raramente caminham juntas — a forma como você se enxerga, o modo como você se comporta, e a imagem que carrega quando entra numa sala — até que comecem a conversar entre si.
+            </p>
+            <a href="#investimento" class="cta-btn" data-i18n="hero.cta">Quero conversar com você</a>
+        </div>
+        <div class="hero-image">
+            <img src="foto3.jpeg" alt="Renilza Miranda">
+        </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="problem">
+        <div class="container">
+            <div class="section-label text-center" data-i18n="problem.label">Antes de qualquer coisa</div>
+            <h2 class="section-title text-center" data-i18n="problem.title">Talvez você não fale isso<br>em voz alta. Mas sente.</h2>
+            <div class="section-line center"></div>
+
+            <div class="problem-grid">
+                <ul class="problem-list">
+                    <li data-i18n="problem.li1">Você sabe que é boa. Só que ninguém parece enxergar isso na velocidade que devia.</li>
+                    <li data-i18n="problem.li2">Olha no espelho e sente que a imagem não combina mais com a mulher que você está virando.</li>
+                    <li data-i18n="problem.li3">Tem dias em que pensa: <em>"quem sou eu pra cobrar isso?"</em> — e baixa o preço sozinha.</li>
+                    <li data-i18n="problem.li4">Vê mulheres com metade da sua história sendo notadas o dobro.</li>
+                    <li data-i18n="problem.li5">Quer construir uma rede, uma presença, uma vida maior. Mas trava na hora de se mostrar.</li>
+                    <li data-i18n="problem.li6">Sente que a vida lá fora não está acompanhando o que já mudou dentro de você.</li>
+                </ul>
+
+                <div class="problem-quote">
+                    <p data-i18n="problem.quote">A maior parte das mulheres que eu atendo<br>carrega uma vida inteira no peito que ainda não soube como fazer aparecer por fora.<br>E quase nunca tem a ver com talento.<br>É só uma passagem que ainda está pra acontecer.</p>
+                    <cite data-i18n="problem.cite">— Renilza</cite>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRANSFORMATION -->
+    <section class="transformation">
+        <div class="container">
+            <div class="section-label text-center" data-i18n="transform.label">O movimento silencioso</div>
+            <h2 class="section-title text-center" data-i18n="transform.title">A mulher que você procura<br>já mora em você há um tempo.</h2>
+            <div class="section-line center"></div>
+            <p class="intimate text-center" style="max-width: 620px; margin: 0 auto 24px;" data-i18n="transform.intro">
+                Uma roupa nova é fácil.<br>
+                O que muda de verdade é o jeito de se olhar no espelho.
+            </p>
+
+            <div class="transform-columns">
+                <div class="transform-col before">
+                    <h3 data-i18n="before.h3">Antes</h3>
+                    <ul>
+                        <li data-i18n="before.li1">Você se explica demais. Sempre.</li>
+                        <li data-i18n="before.li2">A roupa diz uma coisa. Seu trabalho, outra. Você, outra ainda.</li>
+                        <li data-i18n="before.li3">Cobra menos pra não ouvir um "não".</li>
+                        <li data-i18n="before.li4">Conhece gente. Mas ninguém te lembra na hora certa.</li>
+                        <li data-i18n="before.li5">Posta sem saber direito por quê. E apaga depois.</li>
+                        <li data-i18n="before.li6">Entra na sala já querendo sair.</li>
+                        <li data-i18n="before.li7">Sente que está sempre fora do lugar — sem entender onde é o seu.</li>
+                    </ul>
+                </div>
+                <div class="transform-arrow">→</div>
+                <div class="transform-col after">
+                    <h3 data-i18n="after.h3">Depois</h3>
+                    <ul>
+                        <li data-i18n="after.li1">Você se reconhece. Antes de tudo, isso.</li>
+                        <li data-i18n="after.li2">Imagem, fala e presença conversando entre si.</li>
+                        <li data-i18n="after.li3">Diz o valor sem suavizar. E sem precisar pedir desculpas.</li>
+                        <li data-i18n="after.li4">Ocupa espaços que antes pareciam grandes demais.</li>
+                        <li data-i18n="after.li5">O que você compartilha começa a atrair quem é da sua frequência.</li>
+                        <li data-i18n="after.li6">Não precisa convencer ninguém de nada. Só ser vista do jeito certo.</li>
+                        <li data-i18n="after.li7">Entra num lugar e a sala muda um pouco. Sem esforço.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- METHOD -->
+    <section class="method" id="metodo">
+        <div class="container">
+            <div class="section-label text-center" data-i18n="method.label">Por dentro</div>
+            <h2 class="section-title text-center" data-i18n="method.title">Quatro passagens.<br><em class="serif" style="color: var(--gold); font-style: italic;">Uma travessia.</em></h2>
+            <div class="section-line center" style="background: var(--gold);"></div>
+            <p class="intimate text-center" style="max-width: 620px; margin: 0 auto 24px; color: var(--text-muted);" data-i18n="method.intro">
+                A gente conversa por algumas semanas.<br>
+                O que fica dura bem além disso.
+            </p>
+
+            <div class="phases-grid">
+                <div class="phase-card fade-up">
+                    <div class="phase-number">01</div>
+                    <h3 data-i18n="phase1.h3">Quem você é<br>quando ninguém olha</h3>
+                    <p data-i18n="phase1.p">A gente começa por dentro. Sem isso, qualquer mudança lá fora vira fantasia.</p>
+                    <ul class="phase-topics">
+                        <li data-i18n="phase1.t1">Seu manifesto — em 10 linhas que parecem verdade</li>
+                        <li data-i18n="phase1.t2">O painel visual da mulher que você está virando</li>
+                        <li data-i18n="phase1.t3">Diagnóstico honesto da sua imagem hoje</li>
+                        <li data-i18n="phase1.t4">Como vestir o que combina com você (não com a tendência)</li>
+                        <li data-i18n="phase1.t5">O que sua roupa anda dizendo sem te avisar</li>
+                    </ul>
+                </div>
+
+                <div class="phase-card fade-up">
+                    <div class="phase-number">02</div>
+                    <h3 data-i18n="phase2.h3">O lugar onde<br>você quer ser vista</h3>
+                    <p data-i18n="phase2.p">Cada mulher tem um mundo onde sua presença faz mais sentido. A gente encontra o seu.</p>
+                    <ul class="phase-topics">
+                        <li data-i18n="phase2.t1">Quem é a pessoa que você quer atrair de verdade</li>
+                        <li data-i18n="phase2.t2">Os ambientes, bairros, ciclos que combinam com você</li>
+                        <li data-i18n="phase2.t3">Quanto cobrar sem se encolher</li>
+                        <li data-i18n="phase2.t4">A frase que vira sua assinatura</li>
+                        <li data-i18n="phase2.t5">Como circular por dentro dos círculos certos</li>
+                    </ul>
+                </div>
+
+                <div class="phase-card fade-up">
+                    <div class="phase-number">03</div>
+                    <h3 data-i18n="phase3.h3">A presença que<br>fala antes de você</h3>
+                    <p data-i18n="phase3.p">Aqui a gente alinha imagem e comportamento. E você para de precisar se explicar.</p>
+                    <ul class="phase-topics">
+                        <li data-i18n="phase3.t1">Um Instagram que parece você (não uma vitrine)</li>
+                        <li data-i18n="phase3.t2">Como se portar em vídeo sem ficar travada</li>
+                        <li data-i18n="phase3.t3">Conversar sobre dinheiro sem perder a doçura</li>
+                        <li data-i18n="phase3.t4">O ajuste fino da postura, do olhar, do silêncio</li>
+                        <li data-i18n="phase3.t5">Dizer seu valor olhando nos olhos</li>
+                    </ul>
+                </div>
+
+                <div class="phase-card fade-up">
+                    <div class="phase-number">04</div>
+                    <h3 data-i18n="phase4.h3">A vida que se<br>abre depois disso</h3>
+                    <p data-i18n="phase4.p">Mulher alinhada não corre atrás de oportunidade. Ela ocupa o espaço dela.</p>
+                    <ul class="phase-topics">
+                        <li data-i18n="phase4.t1">As pessoas certas pra estar perto neste próximo ano</li>
+                        <li data-i18n="phase4.t2">Movimentos de networking que cabem na sua rotina</li>
+                        <li data-i18n="phase4.t3">Uma reunião simulada e revisada com calma</li>
+                        <li data-i18n="phase4.t4">Como apresentar projetos como quem é dona da história</li>
+                        <li data-i18n="phase4.t5">Seu plano dos próximos 12 meses — feito por você, pra você</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT'S INCLUDED -->
+    <section class="included">
+        <div class="container">
+            <div class="section-label text-center" data-i18n="included.label">O que vive entre a gente</div>
+            <h2 class="section-title text-center" data-i18n="included.title">O cuidado que cabe<br>nessa travessia</h2>
+            <div class="section-line center"></div>
+
+            <div class="included-grid">
+                <div class="included-item fade-up">
+                    <h4 data-i18n="item1.h4">Encontros, só nossos</h4>
+                    <p data-i18n="item1.p">Uma hora por semana, ao vivo, via Zoom. Sem turma, sem espectadora. Cada encontro tem uma pergunta, um movimento e um silêncio pra você processar.</p>
+                </div>
+                <div class="included-item fade-up">
+                    <h4 data-i18n="item2.h4">O que faço entre uma sessão e outra</h4>
+                    <p data-i18n="item2.p">Pequenos exercícios pra você habitar. Um manifesto. Um painel visual. Um vídeo seu, gravado por você, pra você se ver com calma. Aqui a gente pratica devagar.</p>
+                </div>
+                <div class="included-item fade-up">
+                    <h4 data-i18n="item3.h4">Um olhar honesto sobre sua imagem</h4>
+                    <p data-i18n="item3.p">Modelagem, cores, materiais, acessórios. Você sai entendendo por que algumas peças te elevam — e por que outras te encolhem.</p>
+                </div>
+                <div class="included-item fade-up">
+                    <h4 data-i18n="item4.h4">A conversa que ninguém te ensinou</h4>
+                    <p data-i18n="item4.p">Eu te ajudo a falar de dinheiro, valor e limites sem perder a leveza. A gente treina até a voz parar de tremer.</p>
+                </div>
+                <div class="included-item fade-up">
+                    <h4 data-i18n="item5.h4">Um espelho honesto sobre como você se mostra</h4>
+                    <p data-i18n="item5.p">Postura, gesto, olhar, ritmo. Eu te devolvo o que vejo com cuidado, pra você passar a escolher conscientemente o que mostra de si.</p>
+                </div>
+                <div class="included-item fade-up">
+                    <h4 data-i18n="item6.h4">Eu, por perto</h4>
+                    <p data-i18n="item6.p">WhatsApp aberto entre os encontros. Pra uma reunião, uma dúvida, uma vontade de desistir. Você não atravessa isso sozinha.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="foto2.jpeg" alt="Renilza Miranda">
+                </div>
+                <div class="about-text">
+                    <div class="section-label" data-i18n="about.label">Quem te recebe aqui</div>
+                    <h2>Renilza <em class="serif" style="color: var(--gold); font-style: italic;">Miranda</em></h2>
+                    <p class="intimate" style="font-size: 1.15rem; margin-bottom: 24px;" data-i18n="about.intimate1">
+                        Minha vida começou a mudar no dia em que parei de tentar parecer alguma coisa. Não foi um insight bonito — foi quase um cansaço.
+                    </p>
+                    <p data-i18n="about.p1">
+                        Por anos atendi mulheres de alto padrão como esteticista e massoterapeuta. Eram salas silenciosas. Foi ali que entendi uma coisa que ninguém tinha me dito antes: o jeito como você se apresenta muda a forma como o mundo te trata. E, sem você perceber, vai mudando também a forma como você se trata por dentro.
+                    </p>
+                    <p data-i18n="about.p2">
+                        Me formei em Consultoria de Imagem por uma escola francesa de referência e segui pra Paris fazer especializações em Estilo e Mercado de Luxo. Sigo voltando — estudar virou parte do meu ritmo.
+                    </p>
+                    <p data-i18n="about.p3">
+                        Saí de São Paulo, morei em Dubai, hoje vivo entre cidades na Europa. Dessa travessia veio um jeito meu de trabalhar — sem fórmula pronta, com muito cuidado no detalhe. Uma mulher de cada vez.
+                    </p>
+                    <p class="intimate" style="font-size: 1.05rem; color: var(--gold-dark); margin-top: 24px;" data-i18n="about.intimate2">
+                        A mulher que você procura já está aqui dentro.<br>
+                        Meu trabalho é só te ajudar a parar de competir com ela.
+                    </p>
+                    <ul class="about-credentials">
+                        <li data-i18n="cred1">Formação em Consultoria de Imagem por escola francesa de referência</li>
+                        <li data-i18n="cred2">Especializações em Estilo e Mercado de Luxo em Paris</li>
+                        <li data-i18n="cred3">Especialista em Imagem, Posicionamento e Percepção de Valor</li>
+                        <li data-i18n="cred4">Criadora da Mentoria 360°</li>
+                        <li data-i18n="cred5">Experiência com clientes premium e público high ticket</li>
+                        <li data-i18n="cred6">Vivência internacional entre Dubai e Europa</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-label text-center" data-i18n="testimonials.label">Histórias que ficaram comigo</div>
+            <h2 class="section-title text-center" data-i18n="testimonials.title">Mulheres que já<br>passaram por aqui</h2>
+            <div class="section-line center"></div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-up">
+                    <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+                    <p data-i18n="t1.quote">Eu sempre soube que era boa. Demorei mesmo a entender por que as pessoas não enxergavam isso na minha velocidade. Hoje sou olhada de um jeito diferente — e, talvez o mais importante, eu também me olho assim.</p>
+                    <div class="testimonial-author">Carolina M.</div>
+                    <div class="testimonial-role">São Paulo</div>
+                </div>
+                <div class="testimonial-card fade-up">
+                    <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+                    <p data-i18n="t2.quote">A Re tem uma forma de te ouvir que faz você se ouvir. Parei de baixar preço por medo, parei de me explicar demais, parei de pedir desculpa por existir. Foi quase silencioso. E foi tudo.</p>
+                    <div class="testimonial-author">Patrícia R.</div>
+                    <div class="testimonial-role">Rio de Janeiro</div>
+                </div>
+                <div class="testimonial-card fade-up">
+                    <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+                    <p data-i18n="t3.quote">Vim atrás de imagem. Voltei pra casa com outra coisa — uma forma de viver que finalmente se parece comigo. E a vida que eu queria há tanto tempo está, enfim, acontecendo.</p>
+                    <div class="testimonial-author">Fernanda L.</div>
+                    <div class="testimonial-role">Belo Horizonte</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing" id="investimento">
+        <div class="container">
+            <div class="section-label text-center" data-i18n="pricing.label">Como entrar</div>
+            <h2 class="section-title text-center" data-i18n="pricing.title">Dois caminhos.<br><em class="serif" style="color: var(--gold); font-style: italic;">A mesma travessia.</em></h2>
+            <div class="section-line center" style="background: var(--gold);"></div>
+            <p class="intimate text-center" style="max-width: 580px; margin: 0 auto 24px; color: var(--text-muted); font-size: 1.05rem;" data-i18n="pricing.intro">
+                Você escolhe a profundidade.<br>
+                Eu cuido do resto.
+            </p>
+
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-name" data-i18n="essencial.name">Essencial</div>
+                    <div class="pricing-sessions" data-i18n="essencial.sessions">Quatro encontros, um mês juntas</div>
+                    <div class="pricing-value"><span>R$</span>6.997</div>
+                    <div class="pricing-installment" data-i18n="essencial.installment">ou 12x de R$ 699,70</div>
+                    <ul class="pricing-features">
+                        <li data-i18n="essencial.f1">4 encontros íntimos de 1h, no Zoom</li>
+                        <li data-i18n="essencial.f2">Um olhar honesto sobre sua imagem</li>
+                        <li data-i18n="essencial.f3">Seu manifesto — escrito com você</li>
+                        <li data-i18n="essencial.f4">Guia de códigos visuais que te elevam</li>
+                        <li data-i18n="essencial.f5">A frase que vira sua assinatura</li>
+                        <li data-i18n="essencial.f6">Pequenos exercícios entre as sessões</li>
+                        <li data-i18n="essencial.f7">WhatsApp aberto por 30 dias</li>
+                    </ul>
+                    <a href="#contato" class="cta-btn cta-btn-outline" style="display:block;" data-i18n="essencial.cta">Começar pelo Essencial</a>
+                </div>
+
+                <div class="pricing-card featured" data-badge="A travessia inteira">
+                    <div class="pricing-name" data-i18n="completo.name">Completo</div>
+                    <div class="pricing-sessions" data-i18n="completo.sessions">Oito encontros, dois meses de presença</div>
+                    <div class="pricing-value"><span>R$</span>9.997</div>
+                    <div class="pricing-installment" data-i18n="completo.installment">ou 12x de R$ 999,70</div>
+                    <ul class="pricing-features">
+                        <li data-i18n="completo.f1">8 encontros íntimos de 1h, no Zoom</li>
+                        <li data-i18n="completo.f2">Um olhar honesto sobre sua imagem</li>
+                        <li data-i18n="completo.f3">Seu manifesto — escrito com você</li>
+                        <li data-i18n="completo.f4">Guia de códigos visuais por ocasião</li>
+                        <li data-i18n="completo.f5">A frase que te apresenta antes de você</li>
+                        <li data-i18n="completo.f6">A conversa sobre dinheiro, ensaiada com calma</li>
+                        <li data-i18n="completo.f7">Apresentação gravada e revisada com cuidado</li>
+                        <li data-i18n="completo.f8">Sua rede dos próximos meses, mapeada</li>
+                        <li data-i18n="completo.f9">Um plano honesto pros próximos 12 meses</li>
+                        <li data-i18n="completo.f10">WhatsApp aberto por 60 dias</li>
+                    </ul>
+                    <a href="#contato" class="cta-btn" style="display:block;" data-i18n="completo.cta">Atravessar o Completo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-label text-center" data-i18n="faq.label">O que talvez você esteja se perguntando</div>
+            <h2 class="section-title text-center" data-i18n="faq.title">Algumas dúvidas honestas<br>antes de você decidir</h2>
+            <div class="section-line center"></div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" data-i18n="faq.q1">Isso é só pra arquitetas?</button>
+                    <div class="faq-answer">
+                        <p data-i18n="faq.a1">Não. Esse trabalho nasceu olhando pra arquitetas, mas as mulheres que mais se reconhecem aqui são as que sentem que carregam mais por dentro do que conseguem mostrar por fora — advogadas, médicas, empresárias, criativas. Se você é uma delas, é seu lugar.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" data-i18n="faq.q2">Preciso morar no Brasil?</button>
+                    <div class="faq-answer">
+                        <p data-i18n="faq.a2">Nada disso. A gente se encontra no Zoom. Eu mesma vivo entre cidades, então atender mulher em qualquer fuso virou parte do meu cotidiano. A leitura do seu contexto a gente ajusta junto.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" data-i18n="faq.q3">Qual a diferença real entre o Essencial e o Completo?</button>
+                    <div class="faq-answer">
+                        <p data-i18n="faq.a3">O Essencial é uma passagem mais curta — quatro encontros para você se reconhecer, ajustar imagem e clarear o seu lugar. O Completo é uma travessia inteira: oito encontros, mais profundidade, treinos delicados de negociação, presença, networking e um plano honesto pros próximos 12 meses. Se quer ir até o fim, é o Completo.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" data-i18n="faq.q4">Como é o ritmo dos encontros?</button>
+                    <div class="faq-answer">
+                        <p data-i18n="faq.a4">Uma hora, uma vez por semana. O Essencial dura cerca de um mês. O Completo, dois. No meio, você tem exercícios pra habitar — e o meu WhatsApp pra quando precisar de um respiro ou de uma resposta.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" data-i18n="faq.q5">E se, na primeira sessão, eu sentir que não é pra mim?</button>
+                    <div class="faq-answer">
+                        <p data-i18n="faq.a5">Você tem sete dias pra dizer isso pra mim. Devolvo tudo, sem perguntas. Esse trabalho só faz sentido se for vontade de duas — e aqui eu prefiro mil vezes uma mulher honesta do que uma vaga preenchida.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" data-i18n="faq.q6">Dá pra parcelar?</button>
+                    <div class="faq-answer">
+                        <p data-i18n="faq.a6">Dá. Até 12x no cartão. Se preferir PIX à vista, conversamos uma condição mais cuidadosa.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta" id="contato">
+        <div class="container">
+            <h2 class="serif" data-i18n="finalcta.h2">Tem coisas que a gente<br>já sabe há muito tempo.<br>Só faltava alguém <em style="color: var(--gold); font-style: italic;">escutar junto</em>.</h2>
+            <p data-i18n="finalcta.p">Atendo poucas mulheres por mês. Esse é o ritmo que eu consigo manter com inteireza. Se essa página ainda está no ar, ainda tem um lugar aqui pra você.</p>
+            <a href="https://wa.me/5511950291364?text=Oi%20Renilza%2C%20quero%20saber%20mais%20sobre%20o%20M%C3%A9todo%20Prisma!" class="cta-btn" data-i18n="finalcta.cta">Conversar comigo no WhatsApp</a>
+            <div class="guarantee" data-i18n="guarantee">Sete dias pra sentir se faz sentido. Se não fizer, devolvo tudo — sem ruído.</div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>Método Prisma &copy; 2026 — <a href="https://instagram.com/renilzamirandaa" target="_blank" rel="noopener">@renilzamirandaa</a></p>
+            <p style="margin-top: 8px; font-size: 0.72rem;" data-i18n="footer.tagline">Renilza Miranda · imagem, presença e a forma como você se enxerga</p>
+            <a href="/" class="home-link" data-i18n="footer.home">← Voltar ao site</a>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+        "use strict";
+        var STORAGE_KEY = "renilza_lang";
+        var SUPPORTED = ["pt", "en"];
+
+        var T = {
+            "topbar.cta": { pt: `Conversar comigo`, en: `Let's talk` },
+            "hero.badge": { pt: `Uma conversa com Renilza Miranda`, en: `A conversation with Renilza Miranda` },
+            "hero.subtitle": { pt: `Para a mulher que sente que já passou da hora<br>de viver alinhada com o que sempre soube por dentro.`, en: `For the woman who feels it's long past time<br>to live aligned with what she has always known inside.` },
+            "hero.desc1": { pt: `Existe um momento em que tentar parecer cansa.<br>Daí em diante, o que pede passagem é outra coisa.`, en: `There comes a moment when trying to seem grows tiring.<br>From then on, what asks to come through is something else.` },
+            "hero.desc2": { pt: `A gente trabalha em três frentes que raramente caminham juntas — a forma como você se enxerga, o modo como você se comporta, e a imagem que carrega quando entra numa sala — até que comecem a conversar entre si.`, en: `We work on three fronts that rarely move together — the way you see yourself, the way you carry yourself, and the image you bring when you walk into a room — until they begin to speak to one another.` },
+            "hero.cta": { pt: `Quero conversar com você`, en: `I want to talk with you` },
+
+            "problem.label": { pt: `Antes de qualquer coisa`, en: `Before anything else` },
+            "problem.title": { pt: `Talvez você não fale isso<br>em voz alta. Mas sente.`, en: `Maybe you don't say this<br>out loud. But you feel it.` },
+            "problem.li1": { pt: `Você sabe que é boa. Só que ninguém parece enxergar isso na velocidade que devia.`, en: `You know you're good. It's just that no one seems to see it as fast as they should.` },
+            "problem.li2": { pt: `Olha no espelho e sente que a imagem não combina mais com a mulher que você está virando.`, en: `You look in the mirror and feel the image no longer matches the woman you're becoming.` },
+            "problem.li3": { pt: `Tem dias em que pensa: <em>"quem sou eu pra cobrar isso?"</em> — e baixa o preço sozinha.`, en: `Some days you think: <em>"who am I to charge this?"</em> — and lower the price yourself.` },
+            "problem.li4": { pt: `Vê mulheres com metade da sua história sendo notadas o dobro.`, en: `You see women with half your story being noticed twice as much.` },
+            "problem.li5": { pt: `Quer construir uma rede, uma presença, uma vida maior. Mas trava na hora de se mostrar.`, en: `You want to build a network, a presence, a bigger life. But you freeze when it's time to show up.` },
+            "problem.li6": { pt: `Sente que a vida lá fora não está acompanhando o que já mudou dentro de você.`, en: `You feel the life out there isn't keeping up with what has already changed inside you.` },
+            "problem.quote": { pt: `A maior parte das mulheres que eu atendo<br>carrega uma vida inteira no peito que ainda não soube como fazer aparecer por fora.<br>E quase nunca tem a ver com talento.<br>É só uma passagem que ainda está pra acontecer.`, en: `Most of the women I work with<br>carry a whole life in their chest they haven't yet known how to let show on the outside.<br>And it almost never has to do with talent.<br>It's just a passage still waiting to happen.` },
+            "problem.cite": { pt: `— Renilza`, en: `— Renilza` },
+
+            "transform.label": { pt: `O movimento silencioso`, en: `The quiet shift` },
+            "transform.title": { pt: `A mulher que você procura<br>já mora em você há um tempo.`, en: `The woman you're looking for<br>has lived in you for a while now.` },
+            "transform.intro": { pt: `Uma roupa nova é fácil.<br>O que muda de verdade é o jeito de se olhar no espelho.`, en: `A new outfit is easy.<br>What truly changes is the way you look at yourself in the mirror.` },
+            "before.h3": { pt: `Antes`, en: `Before` },
+            "before.li1": { pt: `Você se explica demais. Sempre.`, en: `You over-explain. Always.` },
+            "before.li2": { pt: `A roupa diz uma coisa. Seu trabalho, outra. Você, outra ainda.`, en: `Your clothes say one thing. Your work, another. You, yet another.` },
+            "before.li3": { pt: `Cobra menos pra não ouvir um "não".`, en: `You charge less to avoid hearing a "no".` },
+            "before.li4": { pt: `Conhece gente. Mas ninguém te lembra na hora certa.`, en: `You know people. But no one remembers you at the right moment.` },
+            "before.li5": { pt: `Posta sem saber direito por quê. E apaga depois.`, en: `You post without quite knowing why. And delete it later.` },
+            "before.li6": { pt: `Entra na sala já querendo sair.`, en: `You walk into the room already wanting to leave.` },
+            "before.li7": { pt: `Sente que está sempre fora do lugar — sem entender onde é o seu.`, en: `You feel always out of place — without understanding where yours is.` },
+            "after.h3": { pt: `Depois`, en: `After` },
+            "after.li1": { pt: `Você se reconhece. Antes de tudo, isso.`, en: `You recognize yourself. Before anything else, that.` },
+            "after.li2": { pt: `Imagem, fala e presença conversando entre si.`, en: `Image, voice and presence speaking to one another.` },
+            "after.li3": { pt: `Diz o valor sem suavizar. E sem precisar pedir desculpas.`, en: `You state your worth without softening it. And without apologizing.` },
+            "after.li4": { pt: `Ocupa espaços que antes pareciam grandes demais.`, en: `You occupy spaces that once felt too big.` },
+            "after.li5": { pt: `O que você compartilha começa a atrair quem é da sua frequência.`, en: `What you share begins to attract those on your frequency.` },
+            "after.li6": { pt: `Não precisa convencer ninguém de nada. Só ser vista do jeito certo.`, en: `You don't need to convince anyone of anything. Just to be seen the right way.` },
+            "after.li7": { pt: `Entra num lugar e a sala muda um pouco. Sem esforço.`, en: `You enter a place and the room shifts a little. Effortlessly.` },
+
+            "method.label": { pt: `Por dentro`, en: `On the inside` },
+            "method.title": { pt: `Quatro passagens.<br><em class="serif" style="color: var(--gold); font-style: italic;">Uma travessia.</em>`, en: `Four passages.<br><em class="serif" style="color: var(--gold); font-style: italic;">One crossing.</em>` },
+            "method.intro": { pt: `A gente conversa por algumas semanas.<br>O que fica dura bem além disso.`, en: `We talk for a few weeks.<br>What stays lasts far beyond that.` },
+            "phase1.h3": { pt: `Quem você é<br>quando ninguém olha`, en: `Who you are<br>when no one is watching` },
+            "phase1.p": { pt: `A gente começa por dentro. Sem isso, qualquer mudança lá fora vira fantasia.`, en: `We start on the inside. Without that, any outer change becomes make-believe.` },
+            "phase1.t1": { pt: `Seu manifesto — em 10 linhas que parecem verdade`, en: `Your manifesto — in 10 lines that feel true` },
+            "phase1.t2": { pt: `O painel visual da mulher que você está virando`, en: `The visual board of the woman you're becoming` },
+            "phase1.t3": { pt: `Diagnóstico honesto da sua imagem hoje`, en: `An honest diagnosis of your image today` },
+            "phase1.t4": { pt: `Como vestir o que combina com você (não com a tendência)`, en: `How to wear what suits you (not the trend)` },
+            "phase1.t5": { pt: `O que sua roupa anda dizendo sem te avisar`, en: `What your clothes have been saying without telling you` },
+            "phase2.h3": { pt: `O lugar onde<br>você quer ser vista`, en: `The place where<br>you want to be seen` },
+            "phase2.p": { pt: `Cada mulher tem um mundo onde sua presença faz mais sentido. A gente encontra o seu.`, en: `Every woman has a world where her presence makes the most sense. We find yours.` },
+            "phase2.t1": { pt: `Quem é a pessoa que você quer atrair de verdade`, en: `Who the person you truly want to attract is` },
+            "phase2.t2": { pt: `Os ambientes, bairros, ciclos que combinam com você`, en: `The settings, neighborhoods and circles that fit you` },
+            "phase2.t3": { pt: `Quanto cobrar sem se encolher`, en: `How much to charge without shrinking` },
+            "phase2.t4": { pt: `A frase que vira sua assinatura`, en: `The line that becomes your signature` },
+            "phase2.t5": { pt: `Como circular por dentro dos círculos certos`, en: `How to move within the right circles` },
+            "phase3.h3": { pt: `A presença que<br>fala antes de você`, en: `The presence that<br>speaks before you do` },
+            "phase3.p": { pt: `Aqui a gente alinha imagem e comportamento. E você para de precisar se explicar.`, en: `Here we align image and behavior. And you stop needing to explain yourself.` },
+            "phase3.t1": { pt: `Um Instagram que parece você (não uma vitrine)`, en: `An Instagram that feels like you (not a shop window)` },
+            "phase3.t2": { pt: `Como se portar em vídeo sem ficar travada`, en: `How to carry yourself on camera without freezing` },
+            "phase3.t3": { pt: `Conversar sobre dinheiro sem perder a doçura`, en: `Talking about money without losing your warmth` },
+            "phase3.t4": { pt: `O ajuste fino da postura, do olhar, do silêncio`, en: `The fine-tuning of posture, gaze and silence` },
+            "phase3.t5": { pt: `Dizer seu valor olhando nos olhos`, en: `Saying your worth while looking them in the eye` },
+            "phase4.h3": { pt: `A vida que se<br>abre depois disso`, en: `The life that<br>opens after this` },
+            "phase4.p": { pt: `Mulher alinhada não corre atrás de oportunidade. Ela ocupa o espaço dela.`, en: `An aligned woman doesn't chase opportunity. She occupies her space.` },
+            "phase4.t1": { pt: `As pessoas certas pra estar perto neste próximo ano`, en: `The right people to be near this coming year` },
+            "phase4.t2": { pt: `Movimentos de networking que cabem na sua rotina`, en: `Networking moves that fit your routine` },
+            "phase4.t3": { pt: `Uma reunião simulada e revisada com calma`, en: `A simulated meeting, reviewed calmly` },
+            "phase4.t4": { pt: `Como apresentar projetos como quem é dona da história`, en: `How to present projects like the owner of the story` },
+            "phase4.t5": { pt: `Seu plano dos próximos 12 meses — feito por você, pra você`, en: `Your plan for the next 12 months — made by you, for you` },
+
+            "included.label": { pt: `O que vive entre a gente`, en: `What lives between us` },
+            "included.title": { pt: `O cuidado que cabe<br>nessa travessia`, en: `The care that fits<br>this crossing` },
+            "item1.h4": { pt: `Encontros, só nossos`, en: `Meetings, just ours` },
+            "item1.p": { pt: `Uma hora por semana, ao vivo, via Zoom. Sem turma, sem espectadora. Cada encontro tem uma pergunta, um movimento e um silêncio pra você processar.`, en: `One hour a week, live, over Zoom. No group, no audience. Each meeting holds a question, a movement and a silence for you to process.` },
+            "item2.h4": { pt: `O que faço entre uma sessão e outra`, en: `What I do between one session and the next` },
+            "item2.p": { pt: `Pequenos exercícios pra você habitar. Um manifesto. Um painel visual. Um vídeo seu, gravado por você, pra você se ver com calma. Aqui a gente pratica devagar.`, en: `Small exercises for you to inhabit. A manifesto. A visual board. A video of you, recorded by you, so you can watch yourself calmly. Here we practice slowly.` },
+            "item3.h4": { pt: `Um olhar honesto sobre sua imagem`, en: `An honest look at your image` },
+            "item3.p": { pt: `Modelagem, cores, materiais, acessórios. Você sai entendendo por que algumas peças te elevam — e por que outras te encolhem.`, en: `Fit, color, fabric, accessories. You leave understanding why some pieces lift you — and why others shrink you.` },
+            "item4.h4": { pt: `A conversa que ninguém te ensinou`, en: `The conversation no one taught you` },
+            "item4.p": { pt: `Eu te ajudo a falar de dinheiro, valor e limites sem perder a leveza. A gente treina até a voz parar de tremer.`, en: `I help you talk about money, worth and boundaries without losing your ease. We rehearse until your voice stops trembling.` },
+            "item5.h4": { pt: `Um espelho honesto sobre como você se mostra`, en: `An honest mirror on how you show up` },
+            "item5.p": { pt: `Postura, gesto, olhar, ritmo. Eu te devolvo o que vejo com cuidado, pra você passar a escolher conscientemente o que mostra de si.`, en: `Posture, gesture, gaze, rhythm. I reflect back what I see with care, so you can begin to consciously choose what you reveal of yourself.` },
+            "item6.h4": { pt: `Eu, por perto`, en: `Me, close by` },
+            "item6.p": { pt: `WhatsApp aberto entre os encontros. Pra uma reunião, uma dúvida, uma vontade de desistir. Você não atravessa isso sozinha.`, en: `WhatsApp open between meetings. For a meeting, a doubt, an urge to give up. You don't cross this alone.` },
+
+            "about.label": { pt: `Quem te recebe aqui`, en: `Who welcomes you here` },
+            "about.intimate1": { pt: `Minha vida começou a mudar no dia em que parei de tentar parecer alguma coisa. Não foi um insight bonito — foi quase um cansaço.`, en: `My life began to change the day I stopped trying to seem like something. It wasn't a pretty insight — it was almost exhaustion.` },
+            "about.p1": { pt: `Por anos atendi mulheres de alto padrão como esteticista e massoterapeuta. Eram salas silenciosas. Foi ali que entendi uma coisa que ninguém tinha me dito antes: o jeito como você se apresenta muda a forma como o mundo te trata. E, sem você perceber, vai mudando também a forma como você se trata por dentro.`, en: `For years I cared for high-standard women as an aesthetician and massage therapist. They were quiet rooms. That's where I understood something no one had told me before: the way you present yourself changes how the world treats you. And, without your noticing, it also changes how you treat yourself inside.` },
+            "about.p2": { pt: `Me formei em Consultoria de Imagem por uma escola francesa de referência e segui pra Paris fazer especializações em Estilo e Mercado de Luxo. Sigo voltando — estudar virou parte do meu ritmo.`, en: `I trained in Image Consulting at a leading French school and went on to Paris for specializations in Style and the Luxury Market. I keep going back — studying has become part of my rhythm.` },
+            "about.p3": { pt: `Saí de São Paulo, morei em Dubai, hoje vivo entre cidades na Europa. Dessa travessia veio um jeito meu de trabalhar — sem fórmula pronta, com muito cuidado no detalhe. Uma mulher de cada vez.`, en: `I left São Paulo, lived in Dubai, and today I live between cities in Europe. From that crossing came my own way of working — no ready-made formula, with great care for detail. One woman at a time.` },
+            "about.intimate2": { pt: `A mulher que você procura já está aqui dentro.<br>Meu trabalho é só te ajudar a parar de competir com ela.`, en: `The woman you're looking for is already in here.<br>My work is simply to help you stop competing with her.` },
+            "cred1": { pt: `Formação em Consultoria de Imagem por escola francesa de referência`, en: `Trained in Image Consulting at a leading French school` },
+            "cred2": { pt: `Especializações em Estilo e Mercado de Luxo em Paris`, en: `Specializations in Style and the Luxury Market in Paris` },
+            "cred3": { pt: `Especialista em Imagem, Posicionamento e Percepção de Valor`, en: `Specialist in Image, Positioning and Perceived Value` },
+            "cred4": { pt: `Criadora da Mentoria 360°`, en: `Creator of the 360° Mentorship` },
+            "cred5": { pt: `Experiência com clientes premium e público high ticket`, en: `Experience with premium clients and high-ticket audiences` },
+            "cred6": { pt: `Vivência internacional entre Dubai e Europa`, en: `International experience between Dubai and Europe` },
+
+            "testimonials.label": { pt: `Histórias que ficaram comigo`, en: `Stories that stayed with me` },
+            "testimonials.title": { pt: `Mulheres que já<br>passaram por aqui`, en: `Women who have<br>been through here` },
+            "t1.quote": { pt: `Eu sempre soube que era boa. Demorei mesmo a entender por que as pessoas não enxergavam isso na minha velocidade. Hoje sou olhada de um jeito diferente — e, talvez o mais importante, eu também me olho assim.`, en: `I always knew I was good. It really took me a while to understand why people didn't see it at my speed. Today I'm seen differently — and, perhaps most importantly, I see myself that way too.` },
+            "t2.quote": { pt: `A Re tem uma forma de te ouvir que faz você se ouvir. Parei de baixar preço por medo, parei de me explicar demais, parei de pedir desculpa por existir. Foi quase silencioso. E foi tudo.`, en: `Re has a way of listening to you that makes you listen to yourself. I stopped lowering my price out of fear, stopped over-explaining, stopped apologizing for existing. It was almost silent. And it was everything.` },
+            "t3.quote": { pt: `Vim atrás de imagem. Voltei pra casa com outra coisa — uma forma de viver que finalmente se parece comigo. E a vida que eu queria há tanto tempo está, enfim, acontecendo.`, en: `I came for image. I went home with something else — a way of living that finally looks like me. And the life I wanted for so long is, at last, happening.` },
+
+            "pricing.label": { pt: `Como entrar`, en: `How to begin` },
+            "pricing.title": { pt: `Dois caminhos.<br><em class="serif" style="color: var(--gold); font-style: italic;">A mesma travessia.</em>`, en: `Two paths.<br><em class="serif" style="color: var(--gold); font-style: italic;">The same crossing.</em>` },
+            "pricing.intro": { pt: `Você escolhe a profundidade.<br>Eu cuido do resto.`, en: `You choose the depth.<br>I take care of the rest.` },
+            "essencial.name": { pt: `Essencial`, en: `Essential` },
+            "essencial.sessions": { pt: `Quatro encontros, um mês juntas`, en: `Four meetings, one month together` },
+            "essencial.installment": { pt: `ou 12x de R$ 699,70`, en: `or 12× of R$ 699.70` },
+            "essencial.f1": { pt: `4 encontros íntimos de 1h, no Zoom`, en: `4 intimate 1h meetings, on Zoom` },
+            "essencial.f2": { pt: `Um olhar honesto sobre sua imagem`, en: `An honest look at your image` },
+            "essencial.f3": { pt: `Seu manifesto — escrito com você`, en: `Your manifesto — written with you` },
+            "essencial.f4": { pt: `Guia de códigos visuais que te elevam`, en: `A guide to visual codes that lift you` },
+            "essencial.f5": { pt: `A frase que vira sua assinatura`, en: `The line that becomes your signature` },
+            "essencial.f6": { pt: `Pequenos exercícios entre as sessões`, en: `Small exercises between sessions` },
+            "essencial.f7": { pt: `WhatsApp aberto por 30 dias`, en: `WhatsApp open for 30 days` },
+            "essencial.cta": { pt: `Começar pelo Essencial`, en: `Begin with Essential` },
+            "completo.name": { pt: `Completo`, en: `Complete` },
+            "completo.sessions": { pt: `Oito encontros, dois meses de presença`, en: `Eight meetings, two months of presence` },
+            "completo.installment": { pt: `ou 12x de R$ 999,70`, en: `or 12× of R$ 999.70` },
+            "completo.f1": { pt: `8 encontros íntimos de 1h, no Zoom`, en: `8 intimate 1h meetings, on Zoom` },
+            "completo.f2": { pt: `Um olhar honesto sobre sua imagem`, en: `An honest look at your image` },
+            "completo.f3": { pt: `Seu manifesto — escrito com você`, en: `Your manifesto — written with you` },
+            "completo.f4": { pt: `Guia de códigos visuais por ocasião`, en: `A guide to visual codes by occasion` },
+            "completo.f5": { pt: `A frase que te apresenta antes de você`, en: `The line that introduces you before you do` },
+            "completo.f6": { pt: `A conversa sobre dinheiro, ensaiada com calma`, en: `The money conversation, rehearsed calmly` },
+            "completo.f7": { pt: `Apresentação gravada e revisada com cuidado`, en: `A recorded presentation, reviewed with care` },
+            "completo.f8": { pt: `Sua rede dos próximos meses, mapeada`, en: `Your network for the coming months, mapped` },
+            "completo.f9": { pt: `Um plano honesto pros próximos 12 meses`, en: `An honest plan for the next 12 months` },
+            "completo.f10": { pt: `WhatsApp aberto por 60 dias`, en: `WhatsApp open for 60 days` },
+            "completo.cta": { pt: `Atravessar o Completo`, en: `Cross with Complete` },
+            "completo.badge": { pt: `A travessia inteira`, en: `The whole crossing` },
+
+            "faq.label": { pt: `O que talvez você esteja se perguntando`, en: `What you might be asking yourself` },
+            "faq.title": { pt: `Algumas dúvidas honestas<br>antes de você decidir`, en: `A few honest questions<br>before you decide` },
+            "faq.q1": { pt: `Isso é só pra arquitetas?`, en: `Is this only for architects?` },
+            "faq.a1": { pt: `Não. Esse trabalho nasceu olhando pra arquitetas, mas as mulheres que mais se reconhecem aqui são as que sentem que carregam mais por dentro do que conseguem mostrar por fora — advogadas, médicas, empresárias, criativas. Se você é uma delas, é seu lugar.`, en: `No. This work began by looking at architects, but the women who most recognize themselves here are the ones who feel they carry more inside than they manage to show outside — lawyers, doctors, entrepreneurs, creatives. If you're one of them, this is your place.` },
+            "faq.q2": { pt: `Preciso morar no Brasil?`, en: `Do I need to live in Brazil?` },
+            "faq.a2": { pt: `Nada disso. A gente se encontra no Zoom. Eu mesma vivo entre cidades, então atender mulher em qualquer fuso virou parte do meu cotidiano. A leitura do seu contexto a gente ajusta junto.`, en: `Not at all. We meet on Zoom. I myself live between cities, so working with women in any time zone has become part of my everyday. We adjust the reading of your context together.` },
+            "faq.q3": { pt: `Qual a diferença real entre o Essencial e o Completo?`, en: `What's the real difference between Essential and Complete?` },
+            "faq.a3": { pt: `O Essencial é uma passagem mais curta — quatro encontros para você se reconhecer, ajustar imagem e clarear o seu lugar. O Completo é uma travessia inteira: oito encontros, mais profundidade, treinos delicados de negociação, presença, networking e um plano honesto pros próximos 12 meses. Se quer ir até o fim, é o Completo.`, en: `Essential is a shorter passage — four meetings to recognize yourself, adjust your image and clarify your place. Complete is a whole crossing: eight meetings, more depth, gentle practice in negotiation, presence, networking and an honest plan for the next 12 months. If you want to go all the way, it's Complete.` },
+            "faq.q4": { pt: `Como é o ritmo dos encontros?`, en: `What's the rhythm of the meetings?` },
+            "faq.a4": { pt: `Uma hora, uma vez por semana. O Essencial dura cerca de um mês. O Completo, dois. No meio, você tem exercícios pra habitar — e o meu WhatsApp pra quando precisar de um respiro ou de uma resposta.`, en: `One hour, once a week. Essential lasts about a month. Complete, two. In between, you have exercises to inhabit — and my WhatsApp for when you need a breath or an answer.` },
+            "faq.q5": { pt: `E se, na primeira sessão, eu sentir que não é pra mim?`, en: `And if, in the first session, I feel it's not for me?` },
+            "faq.a5": { pt: `Você tem sete dias pra dizer isso pra mim. Devolvo tudo, sem perguntas. Esse trabalho só faz sentido se for vontade de duas — e aqui eu prefiro mil vezes uma mulher honesta do que uma vaga preenchida.`, en: `You have seven days to tell me. I refund everything, no questions. This work only makes sense if it's wanted by both of us — and here I'd a thousand times rather have an honest woman than a filled spot.` },
+            "faq.q6": { pt: `Dá pra parcelar?`, en: `Can I pay in installments?` },
+            "faq.a6": { pt: `Dá. Até 12x no cartão. Se preferir PIX à vista, conversamos uma condição mais cuidadosa.`, en: `Yes. Up to 12× on card. If you prefer paying in full by PIX, we can talk about a more thoughtful condition.` },
+
+            "finalcta.h2": { pt: `Tem coisas que a gente<br>já sabe há muito tempo.<br>Só faltava alguém <em style="color: var(--gold); font-style: italic;">escutar junto</em>.`, en: `There are things we've<br>known for a long time.<br>We were just missing someone to <em style="color: var(--gold); font-style: italic;">listen alongside us</em>.` },
+            "finalcta.p": { pt: `Atendo poucas mulheres por mês. Esse é o ritmo que eu consigo manter com inteireza. Se essa página ainda está no ar, ainda tem um lugar aqui pra você.`, en: `I work with only a few women each month. That's the rhythm I can hold with wholeness. If this page is still up, there's still a place here for you.` },
+            "finalcta.cta": { pt: `Conversar comigo no WhatsApp`, en: `Talk with me on WhatsApp` },
+            "guarantee": { pt: `Sete dias pra sentir se faz sentido. Se não fizer, devolvo tudo — sem ruído.`, en: `Seven days to feel whether it makes sense. If it doesn't, I refund everything — no noise.` },
+
+            "footer.tagline": { pt: `Renilza Miranda · imagem, presença e a forma como você se enxerga`, en: `Renilza Miranda · image, presence and the way you see yourself` },
+            "footer.home": { pt: `← Voltar ao site`, en: `← Back to the site` }
+        };
+
+        function detectLang() {
+            var saved = null;
+            try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+            if (saved && SUPPORTED.indexOf(saved) !== -1) return saved;
+            var nav = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || navigator.userLanguage || "pt"];
+            for (var i = 0; i < nav.length; i++) {
+                var code = String(nav[i]).toLowerCase();
+                if (code.indexOf("pt") === 0) return "pt";
+                if (code.indexOf("en") === 0) return "en";
+            }
+            return "pt";
+        }
+
+        function applyLang(lang) {
+            if (SUPPORTED.indexOf(lang) === -1) lang = "pt";
+            document.documentElement.setAttribute("lang", lang === "pt" ? "pt-BR" : "en");
+            document.querySelectorAll("[data-i18n]").forEach(function (el) {
+                var key = el.getAttribute("data-i18n");
+                if (T[key] && typeof T[key][lang] === "string") el.innerHTML = T[key][lang];
+            });
+            var featured = document.querySelector(".pricing-card.featured");
+            if (featured && T["completo.badge"]) featured.setAttribute("data-badge", T["completo.badge"][lang]);
+            try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+            document.querySelectorAll(".lang-switch-btn").forEach(function (btn) {
+                btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("lang-switcher").addEventListener("click", function (e) {
+                var btn = e.target.closest(".lang-switch-btn");
+                if (btn) applyLang(btn.getAttribute("data-lang"));
+            });
+            applyLang(detectLang());
+        });
+    })();
+
+    // Sticky header on scroll
+    const topBar = document.getElementById('topBar');
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 500) { topBar.classList.add('visible'); }
+        else { topBar.classList.remove('visible'); }
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.parentElement;
+            const isActive = item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+            if (!isActive) item.classList.add('active');
+        });
+    });
+
+    // Fade-up animation on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+        });
+    });
+    </script>
+</body>
+</html>
