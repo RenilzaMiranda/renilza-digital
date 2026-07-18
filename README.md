@@ -8,8 +8,9 @@ Contexto da organização: a org também contém `brand-kit` (identidade visual 
 
 ```
 apps/
-  site/   → renilzamiranda.com          (site institucional — consultoria de imagem & comportamento)
-  bio/    → link.renilzamiranda.com     (página de link na bio, tráfego do Instagram)
+  site/              → renilzamiranda.com                (site institucional — consultoria de imagem & comportamento)
+  site/metodo-prisma → renilzamiranda.com/metodo-prisma  (página de vendas do Método Prisma, PT/EN)
+  bio/               → link.renilzamiranda.com           (página de link na bio, tráfego do Instagram)
 shared/   → assets de marca (logo, paleta, fotos originais em alta)
 ```
 
@@ -52,5 +53,5 @@ Submissões chegam em: Netlify → projeto renilza-miranda → Forms.
 - [ ] Depoimentos (Carolina M., Patrícia R., Fernanda L.) — confirmar autorização de uso.
 - [ ] Handles sociais (@renilzamirandaa IG/YT, @renilzalifestyle TikTok) — confirmar.
 - [x] `apps/bio` — código importado do repo WillParente/renilza-bio (commit 37ecf71), com o link do Método Prisma já corrigido para renilzamiranda.github.io.
-- [ ] Limpeza pós-migração (fazer **depois** que o Netlify estiver conectado a este repo e os deploys validados): deletar os repos pessoais redundantes `WillParente/renilza-bio`, `WillParente/metodo-prisma` (duplicata exata do da org — mesmo commit 0a43c44) e `WillParente/RenilzaMiranda` (stub vazio); arquivar `RenilzaMiranda/renilza-bio` (conteúdo absorvido aqui).
-- [ ] Futuro: avaliar mover a página do Método Prisma para dentro deste monorepo (ex.: renilzamiranda.com/prisma) em vez do GitHub Pages.
+- [x] Método Prisma trazido para dentro do monorepo em `apps/site/metodo-prisma` (renilzamiranda.com/metodo-prisma), agora com PT/EN. O link do Método Prisma no `apps/bio` foi atualizado para apontar pra cá.
+- [ ] Limpeza pós-migração (fazer **depois** que o Netlify estiver validado): deletar os repos pessoais redundantes `WillParente/renilza-bio`, `WillParente/metodo-prisma` e `WillParente/RenilzaMiranda` (stub vazio); arquivar `RenilzaMiranda/renilza-bio` e `RenilzaMiranda/metodo-prisma` (conteúdo absorvido aqui — o GitHub Pages antigo pode ser desligado).
