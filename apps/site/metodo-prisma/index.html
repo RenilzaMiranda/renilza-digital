@@ -223,7 +223,9 @@
 
         .cta-btn {
             display: inline-block;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(120deg, var(--gold) 0%, #dcc494 48%, var(--gold-dark) 100%);
             color: var(--dark-bg);
             padding: 18px 48px;
             font-size: 0.85rem;
@@ -233,19 +235,50 @@
             text-decoration: none;
             transition: all 0.4s ease;
             border: none;
+            border-radius: 16px;
             cursor: pointer;
+            box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.65);
+        }
+
+        .cta-btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -70%;
+            width: 45%;
+            height: 100%;
+            background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+            transform: skewX(-22deg);
+            animation: shine 3.6s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0%, 55% { left: -70%; }
+            75%, 100% { left: 130%; }
         }
 
         .cta-btn:hover {
-            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(197, 165, 114, 0.3);
+            box-shadow: 0 18px 40px -16px rgba(197, 165, 114, 0.6);
+        }
+
+        .cta-btn:active {
+            transform: scale(0.975);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cta-btn::after { animation: none; }
         }
 
         .cta-btn-outline {
             background: transparent;
             border: 1px solid var(--gold);
             color: var(--gold);
+            box-shadow: none;
+        }
+
+        .cta-btn-outline::after {
+            display: none;
         }
 
         .cta-btn-outline:hover {
